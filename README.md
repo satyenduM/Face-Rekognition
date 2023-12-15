@@ -1,5 +1,5 @@
 
-# Face Recognition with Google Drive and AWS Rekognition
+# Face Recognition with Google Drive using AWS Rekognition
 
 This repository contains a Python script that integrates Google Drive and Amazon Web Services (AWS) Rekognition for an automated face recognition process. The script downloads images from a specified Google Drive folder, uploads them to an AWS S3 bucket, and then uses AWS Rekognition to compare these images with a reference face image. Matched images are identified and are moved to another S3 bucket.
 
