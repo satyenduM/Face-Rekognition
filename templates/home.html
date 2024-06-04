@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/">
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/form_styles.css" />
+  </head>
+  <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    {% include 'partials/_header.html' %}
+    <div class="container mx-auto px-4 mt-8 min-h-screen">
+      <div class="text-center py-10">
+        <form method="POST" enctype="multipart/form-data">
+          <div class="mb-4">
+            <label for="drive_link" class="block text-sm font-medium text-gray-700">Google Drive Link</label>
+            <input type="url" id="drive_link" name="drive_link" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          </div>
+          <div class="mb-4">
+            <label for="reference_image" class="block text-sm font-medium text-gray-700">Reference Image</label>
+            <input type="file" id="reference_image" name="reference_image" accept="image/*" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          </div>
+          <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Submit</button>
+        </form>
+      </div>
+    </div>
+    <script src="/static/js/script.js"></script>
+  </body>
+</html>
