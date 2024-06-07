@@ -2,7 +2,7 @@ import boto3
 import json
 
 def call_lambda_function(function_name, payload):
-    client = boto3.client('lambda', region_name='ap-south-1')
+    client = boto3.client('lambda')
     try:
         response = client.invoke(
             FunctionName=function_name,

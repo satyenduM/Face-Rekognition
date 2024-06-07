@@ -15,18 +15,18 @@ def create_app():
             drive_link = request.form.get("drive_link")
             folder_id = extract_folder_id(drive_link)
             reference_image = request.files.get("reference_image")
-            # Upload the reference image to the initial S3 bucket
-            reference_image_id = upload_file_to_storage(reference_image)  # Upload the reference image to storage
-            # Call the driveToS3 lambda function with folder_id and bucket_name
-            s3_bucket = call_lambda_function('driveToS3', {'folder_id': folder_id, 'bucket_name': 'face-rekognition2'})
-            # Specify the bucket name where the reference image should be uploaded
-            initial_s3_bucket = 'face-rekognition2'
-            # Call the face_rekog_adv lambda function
-            result_bucket = call_lambda_function('face_rekog_adv', {'source_bucket': initial_s3_bucket, 'source_image': reference_image_id, 'target_bucket': 'resultbucket0'})  # Call the face recognition lambda function
-            # Call the zipS3Bucket lambda function
-            download_url = call_lambda_function('zipS3Bucket', {'s3_bucket_name': 'resultbucket0'})  # Zip the result bucket and get the download URL
+            reference_image_id = upload_file_to_storage(reference_image)
             
-            return render_template("result.html", download_url=download_url)
+            from celery_worker import process_images
+            task = process_images.delay(folder_id, reference_image_id)
+            
+            return render_template("result.html", task_id=task.id)
         return render_template("home.html")
+    
+    @app.route("/task-status/<task_id>")
+    def task_status(task_id):
+        from celery.result import AsyncResult
+        result = AsyncResult(task_id)
+        return {"status": result.status, "result": result.result}
     
     return app
