@@ -1,6 +1,7 @@
 from celery import Celery
 from lambda_functions import call_lambda_function
-celery_app = Celery('tasks', broker='redis://localhost:6379/0', backend='redis://localhost:6379/0')
+import os
+celery_app = Celery('tasks', broker=os.environ.get('REDIS_URL', 'redis://localhost:6379/0'))
 
 @celery_app.task
 def process_images(folder_id, reference_image_id):
