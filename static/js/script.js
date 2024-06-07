@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         menu.style.display = (menu.style.display === 'none') ? 'block' : 'none';
     });
 
-    const taskId = document.querySelector('script').innerHTML.match(/taskId = "([^"]+)"/)[1];
+    const taskId = "{{ task_id }}";
 
     if (taskId) {
         const statusElement = document.getElementById('status');
