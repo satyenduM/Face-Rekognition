@@ -6,4 +6,4 @@ flask-static-compress
 flask==3.0.1
 gunicorn
 redis
-werkzeug==3.0.1
+werkzeug==3.0.3
