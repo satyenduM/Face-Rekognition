@@ -5,7 +5,6 @@ from gunicorn.app.base import BaseApplication
 from routes import create_app
 app = create_app()
 
-# Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -16,7 +15,6 @@ class StandaloneApplication(BaseApplication):
         super().__init__()
 
     def load_config(self):
-        # Apply configuration to Gunicorn
         for key, value in self.options.items():
             if key in self.cfg.settings and value is not None:
                 self.cfg.set(key.lower(), value)
