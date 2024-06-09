@@ -1,5 +1,7 @@
-broker_url = 'redis://localhost:6379/0'
-result_backend = 'redis://localhost:6379/0'
+import os
+
+broker_url = os.environ.get('REDIS_URL')
+result_backend = os.environ.get('REDIS_URL')
 task_serializer = 'json'
 result_serializer = 'json'
 accept_content = ['json']
