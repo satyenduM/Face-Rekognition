@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const downloadLink = document.getElementById('download-link');
         const interval = setInterval(async () => {
             const response = await fetch(`/task-status/${taskId}`);
-            const data = await response.json();
+            const data = await response.text();
             if (data.status === 'SUCCESS') {
                 clearInterval(interval);
                 statusElement.textContent = 'Processing complete!';
